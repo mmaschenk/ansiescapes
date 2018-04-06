@@ -1,11 +1,15 @@
 import base64
 import numbers
 import os
+import sys
 
 ESC = '\u001B['
 isTerminalApp = 1 if os.environ['TERM_PROGRAM'] == 'Apple_Terminal' else 0
 
-def _(s): return s.decode('unicode_escape');
+if sys.version_info[0] == 2:
+  def _(s): return s.decode('unicode_escape')
+else:
+  def _(s): return s
 
 def cursorTo(x, y = None):
   if (not isinstance(x, numbers.Number)):
